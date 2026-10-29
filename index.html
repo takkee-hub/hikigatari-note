@@ -824,7 +824,7 @@ function startCountIn(){
  const meter=meterAt(Math.floor(position/4)).split('/');const beats=Math.max(1,Number(meter[0])||4);
  const denominator=Math.max(1,Number(meter[1])||4);const interval=60000/tempo()*4/denominator;
  function frame(now){if(!countInActive)return;const beat=Math.floor((now-countInStart)/interval);if(beat>=beats*2){cancelCountIn();hasStartedPlayback=true;anchorPosition=position;anchorTime=performance.now();playing=true;tick();updateControls();return}
- if(beat!==countInLastBeat){countInLastBeat=beat;soundClick(beat%beats===0);showCountIn('カウント '+(Math.floor(beat/beats)+1)+'/2小節　'+(beat%beats+1)+'拍目')}
+ if(beat!==countInLastBeat){countInLastBeat=beat;soundClick(beat%beats===0);showCountIn('カウント '+(Math.floor(beat/beats)+1)+'/2小節　'+(beat%beats+1)+'拍目');updateV100Hud()}
  countInFrame=requestAnimationFrame(frame)}
  countInFrame=requestAnimationFrame(frame);updateControls();
 }
@@ -836,13 +836,18 @@ function togglePlay(){closeFocusFingering();stopWholeSongPreview();clickLastStan
  anchorPosition=position;anchorTime=performance.now();playing=true;tick()}
  updateControls()}
 
-// Ver.100 fix4: restart immediately without a count-in; preserve the established playback engine.
+// Ver.100 fix9: restarting from the beginning gives two full measures of click-only count-in.
+// Keep the existing meter-aware count-in engine and resume-from-here behavior intact.
 function restartFromBeginning(){
- cancelCountIn();if(playing){playing=false;cancelAnimationFrame(raf)}
- hasStartedPlayback=true;position=0;anchorPosition=0;anchorTime=performance.now();
+ cancelCountIn();
+ if(playing){playing=false;cancelAnimationFrame(raf)}
+ hasStartedPlayback=false;
+ position=0;anchorPosition=0;anchorTime=performance.now();
  clickLastStandardBeat=-1;clearBeatGuide();lastBar=-1;lastBeat=-1;
- updateHighlight(false);if(scrolling)scrollToPlayingBar(0);
- playing=true;tick();updateControls();
+ updateHighlight(false);
+ if(scrolling)scrollToPlayingBar(0);
+ startCountIn();
+ updateV100Hud();
 }
 function resumeFromHere(){
  if(playing||countInActive)return;
@@ -1718,7 +1723,7 @@ function updateV100Hud(){
  const dots=document.getElementById('v100BeatDots');
  if(dots.children.length!==count)dots.replaceChildren(...Array.from({length:count},()=>document.createElement('i')));
  Array.from(dots.children).forEach((dot,i)=>dot.classList.toggle('active',i===current));
- document.getElementById('v100State').textContent=countInActive?'タップで中止':playing?'タップで一時停止':'タップで再開';
+ document.getElementById('v100State').textContent=countInActive?'準備クリック '+(Math.max(1,countInLastBeat+1))+'拍目':playing?'タップで一時停止':'タップで再開';
 }
 // Capture only on the score, not on the dedicated exit button or settings.
 document.addEventListener('click',function(e){
