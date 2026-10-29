@@ -249,8 +249,130 @@ body.performance-mode #sheet .bar-wrap > .bar-beat-guide .beat-code{
 .bar-wrap > .bar-beat-guide .bar-beat-cell.playback-beat-now{background:#ffda70!important;color:#18212a!important;border-color:#fff0b0!important;box-shadow:inset 0 0 0 1px #fff0b0!important}
 .bar-wrap > .bar-beat-guide .bar-beat-cell.playback-beat-now .beat-code{color:#18212a!important}
 </style>
+<style id="v100-mobile-performance-style">
+/* Ver.100 mobile performance UI: presentation only; song storage unchanged. */
+#v100Hud{display:none}
+@media(max-width:700px){
+ body.focus-performance #focusControls,body.focus-performance .focus-tip{display:none!important}
+ body.focus-performance header{position:static!important;padding:0!important;height:0!important;overflow:hidden!important}
+ body.focus-performance #songMain .copy-panel,body.focus-performance #songMain .lyrics-memo-toggle{display:none!important}
+ body.focus-performance #songMain .bar-beat-guide{display:grid!important}
+ body.focus-performance #songMain .bar-wrap.playback-current{outline:2px solid #f5c75d;outline-offset:2px;border-radius:8px;background:rgba(245,199,93,.09)}
+ body.focus-performance #v100Hud{display:flex;position:sticky;top:0;z-index:100;align-items:center;justify-content:space-between;gap:8px;padding:9px 12px;background:#12263a;color:#f3f7fb;border-bottom:1px solid #35536b}
+ #v100BeatDots{display:flex;gap:5px;align-items:center}#v100BeatDots i{display:block;width:12px;height:6px;border-radius:6px;background:#70879b}#v100BeatDots i.active{background:#ffd36b;width:23px}
+ #v100Transport{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}#v100Transport button{font-size:12px;padding:8px 7px;min-height:38px;border:1px solid #6d8ba1;border-radius:8px;background:#284e69;color:#fff;font-weight:600}#v100Restart{background:#2b6680!important}#v100Exit{font-size:12px;padding:8px;border:1px solid #70879b;border-radius:8px;background:#294a62;color:white;min-height:38px}
+ body.focus-performance #songMain{touch-action:pan-y}
+}
+</style><style id="v100-fix2-style">
+@media(max-width:700px){
+ body.focus-performance #songMain .bar-wrap>.bar-beat-guide{display:grid!important;grid-template-columns:repeat(var(--beat-count,4),minmax(0,1fr));gap:3px;margin:3px 0 5px;min-height:34px}
+ body.focus-performance #songMain .bar-wrap>.bar-beat-guide .bar-beat-cell{font-size:0!important;min-height:35px;padding:5px 1px!important;border-radius:5px}
+ body.focus-performance #songMain .bar-wrap>.bar-beat-guide .beat-code{display:block;font-size:clamp(12px,3.5vw,17px)!important;line-height:1.4;overflow-wrap:anywhere}
+ body.focus-performance #songMain .bar-wrap>.word{padding-top:14px!important;overflow:visible!important}
+ body.focus-performance #songMain .lyric-text{overflow:visible!important;line-height:2.3!important}
+ body.focus-performance #songMain .above-chord{display:inline!important;visibility:visible!important}
+ #focusFingeringPopup{width:min(var(--finger-popup-width,240px),calc(100vw - 24px));padding:10px}
+ #focusFingeringDiagram .diagram-svg{max-width:100%;max-height:180px}
+ #focusFingeringPopup .focus-fingering-top{flex-wrap:wrap;gap:5px}
+ #focusFingeringPopup .finger-size-control{display:flex;gap:3px;width:100%;align-items:center;font-size:11px}
+ #focusFingeringPopup .finger-size-control button{padding:5px 8px;font-size:12px}
+ #focusFingeringPopup .finger-size-control button[aria-pressed="true"]{background:#f2c96d;color:#182838}
+}
+</style>
+<style id="v100-fix5-performance-layout">
+/* fix5: presentation only. Keep song data, editing, click and transport unchanged. */
+body.focus-performance #songMain .bar-wrap > .measure-beat-dots {
+  display:flex; gap:6px; align-items:center; min-height:12px;
+  margin:1px 0 5px; padding-left:2px;
+}
+body.focus-performance #songMain .measure-beat-dot {
+  width:7px; height:7px; border-radius:50%;
+  background:#70879b; border:1px solid #8193a4; flex:none;
+}
+body.focus-performance #songMain .measure-beat-dot.is-current {
+  background:#ffd36b; border-color:#ffe4a0; box-shadow:0 0 5px #e3b74b;
+}
+body.focus-performance #songMain .bar-wrap > .word .lyric-text {
+  text-align:left!important; text-align-last:left!important;
+  letter-spacing:normal!important; word-spacing:normal!important;
+  white-space:pre-wrap!important; overflow-wrap:anywhere!important;
+  word-break:normal!important; max-width:100%;
+}
+@media(max-width:700px){
+  body.focus-performance #songMain .bars,
+  body.focus-performance[data-focus-size="small"] #songMain .bars,
+  body.focus-performance[data-focus-size="medium"] #songMain .bars,
+  body.focus-performance[data-focus-size="large"] #songMain .bars {
+    display:grid!important; grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    column-gap:7px!important; row-gap:10px!important;
+  }
+  body.focus-performance #songMain .bar-wrap {min-width:0!important; padding-top:21px!important}
+  body.focus-performance #songMain .bar-wrap > .word {
+    min-height:55px!important; margin-top:4px!important; padding:7px 5px!important;
+    overflow:hidden!important;
+  }
+  body.focus-performance #songMain .bar-wrap > .word .lyric-text {
+    font-size:clamp(12px,3.6vw,16px)!important; line-height:1.55!important;
+    overflow:visible!important;
+  }
+  body.focus-performance #songMain .bar-wrap > .bar-beat-guide {
+    gap:2px!important; min-height:32px!important;
+  }
+  body.focus-performance #songMain .bar-wrap > .bar-beat-guide .bar-beat-cell {
+    min-width:0!important; min-height:33px!important; padding:3px 0!important;
+  }
+  body.focus-performance #songMain .bar-wrap > .bar-beat-guide .beat-code {
+    font-size:clamp(10px,2.9vw,14px)!important;
+  }
+  body.focus-performance #songMain .bar-wrap > .measure-beat-dots {
+    gap:5px; margin:0 0 4px;
+  }
+}
+</style>
+
+
+
+<style id="fix7-fingering">
+body.focus-performance #focusFingeringPopup{
+ position:fixed!important;left:auto;top:auto;right:8px;bottom:12px;
+ width:min(var(--finger-popup-width,116px),calc(100vw - 16px))!important;
+ min-width:0!important;max-width:calc(100vw - 16px)!important;
+ padding:4px!important;margin:0!important;z-index:120!important;
+ border:1px solid #6f9ab3!important;border-radius:9px!important;
+ background:#172d40f5!important;box-shadow:0 4px 15px #0008!important;
+}
+body.focus-performance #focusFingeringPopup .focus-fingering-top{display:none!important}
+body.focus-performance #focusFingeringPopup p{display:none!important}
+body.focus-performance #focusFingeringPopup .focus-fingering-inner{padding:0!important;margin:0!important}
+body.focus-performance #focusFingeringPopup .finger-size-control{
+ display:none!important;gap:3px!important;flex-wrap:wrap!important;
+ margin:3px 0 4px!important;padding:3px!important;width:100%!important;
+}
+body.focus-performance #focusFingeringPopup.finger-settings-open .finger-size-control{display:flex!important}
+body.focus-performance #focusFingeringPopup .finger-size-control button{
+ padding:3px 5px!important;font-size:11px!important;min-width:25px!important
+}
+body.focus-performance #focusFingeringPopup .finger-mini-toolbar{
+ display:flex;align-items:center;justify-content:space-between;gap:4px;
+ height:17px;margin-bottom:3px;user-select:none;
+}
+body.focus-performance #focusFingeringPopup .finger-drag-grip{
+ cursor:grab;touch-action:none;flex:1;text-align:center;
+ color:#a9cadb;font-size:12px;line-height:17px;
+}
+body.focus-performance #focusFingeringPopup .finger-mini-btn{
+ color:#dcecf8;background:#2b475d;border:1px solid #55788f;
+ border-radius:4px;font-size:11px;line-height:15px;min-width:19px;height:17px;padding:0 3px;
+}
+body.focus-performance #focusFingeringDiagram{display:flex;justify-content:center;align-items:center;margin:0!important;padding:0!important}
+body.focus-performance #focusFingeringDiagram .diagram-svg{
+ display:block!important;width:100%!important;height:auto!important;
+ max-width:calc(var(--finger-popup-width,116px) - 12px)!important;
+ max-height:calc(var(--finger-popup-width,116px) * .78)!important;
+}
+</style>
 </head><body>
-<header><h1>🎸 <span id="currentSongTitle">弾き語りノート</span> <span class="small">Ver.99</span></h1>
+<header><h1>🎸 <span id="currentSongTitle">弾き語りノート</span> <span class="small">Ver.100 テスト修正版</span></h1>
 <nav class="mode-tabs" aria-label="操作モード"><button type="button" class="mode-tab selected" data-mode="performance" onclick="setUiMode('performance')">🎤 弾き語り</button><button type="button" class="mode-tab" data-mode="edit" onclick="setUiMode('edit')">✍ 歌詞・コード入力</button><button type="button" class="mode-tab" data-mode="daw" onclick="setUiMode('daw')">🎹 DAW</button></nav>
 <div class="toolbar" id="mainToolbar">
  <div class="mode-panel" data-panel="performance"><div class="control-group"><span class="group-label">再生・一時停止・ループ</span><button id="play" class="primary" onclick="togglePlay()">▶ 再生</button><button onclick="pausePlayback()">Ⅱ 一時停止</button><button onclick="setLoopPoint('start')">🔁 開始点</button><button onclick="setLoopPoint('end')">終了点</button><button id="loopBtn" onclick="toggleLoopRange()">ループOFF</button><button type="button" onclick="stop();stopWholeSongPreview();setPosition(0);scrollToPlayingBar(0)">↩ 最初に戻る</button><span id="loopStatus" class="song-audition-status"></span></div>
@@ -261,9 +383,9 @@ body.performance-mode #sheet .bar-wrap > .bar-beat-guide .beat-code{
 <div id="focusControls" aria-label="演奏用操作"><div class="control-group focus-play-group"><span class="group-label">再生・一時停止・ループ</span><button class="primary" onclick="togglePlay()" id="focusPlay">▶ 再生</button><button onclick="pausePlayback()">Ⅱ 一時停止</button><button onclick="setLoopPoint('start')">🔁 開始点</button><button onclick="setLoopPoint('end')">終了点</button><button id="focusLoopBtn" onclick="toggleLoopRange()">ループOFF</button><button type="button" onclick="stop();stopWholeSongPreview();setPosition(0);scrollToPlayingBar(0)">↩ 最初に戻る</button><span id="focusLoopStatus" class="song-audition-status"></span></div><div class="control-group"><span class="group-label">表示・演奏設定</span><label>クリックモード <select id="focusClickMode" onchange="setClickMode(this.value)"><option value="count">A：カウントのみ</option><option value="continuous">B：クリック継続</option></select></label><span id="focusCountInStatus" aria-live="polite"></span><button onclick="toggleScroll()" id="focusScroll">自動スクロールON</button><button id="focusClickBtn" type="button" onclick="toggleClickTrack()" aria-pressed="false">♩ クリックOFF</button><span id="focusSizeGroup" role="group" aria-label="演奏画面の文字サイズ"><span>文字</span><button type="button" data-size="small" onclick="setFocusSize('small')" aria-pressed="false">小</button><button type="button" data-size="medium" onclick="setFocusSize('medium')" aria-pressed="true">中</button><button type="button" data-size="large" onclick="setFocusSize('large')" aria-pressed="false">大</button></span><button type="button" id="focusFingeringBtn" onclick="toggleFocusFingering()" aria-pressed="true">🎸 運指確認ON（コードをタップ）</button><button type="button" id="focusBeatBoxesBtn" onclick="toggleFocusBeatBoxes()" aria-pressed="false">拍ボックスを隠す</button><button onclick="toggleFocusPerformance()">✕ 演奏画面終了</button></div></div><div class="focus-tip">小節をタップして再生位置を選べます。白玉再生はDAWタブから操作できます。</div>
 <div class="status" id="status">停止中</div><div class="progress"><div id="progress"></div></div></header>
 <div style="background:#1d3b4c;color:#d8f3ff;padding:7px 14px;font-size:12px">運指図は標準チューニングの構成音から生成した候補です。指番号・セーハは推測表示しません。演奏前に押さえやすさを確認してください。</div>
-<section id="libraryView" style="display:none;padding:18px;max-width:950px;margin:auto"><h2>♫ マイ楽曲</h2><p style="color:#bdd1e0">この端末に保存した曲を開けます。編集内容は自動保存されます。</p><button class="primary" onclick="createNewSong()">＋ 新しい曲を作成</button> <button onclick="toggleTrashView()" id="trashViewBtn">🗑 ゴミ箱</button> <button onclick="importLegacySong()">旧バージョンの曲を取り込む</button> <button onclick="exportSongLibrary()">⬇ 全曲バックアップ</button> <button onclick="document.getElementById('songRestoreFile').click()">⬆ バックアップから復元</button><input id="songRestoreFile" type="file" accept=".json,application/json" style="display:none" onchange="restoreSongLibrary(event)"><div style="margin:15px 0;display:flex;gap:8px;flex-wrap:wrap"><input id="librarySearch" placeholder="曲名・アーティスト名で検索" oninput="renderLibrary()" style="min-width:220px;padding:12px;flex:1"><select id="librarySort" onchange="renderLibrary()" style="padding:12px"><option value="updated">更新が新しい順</option><option value="title">曲名順</option></select></div><div id="librarySongs"></div><p id="libraryMessage" style="color:#ffd36b"></p></section><div id="songMeta" style="display:none;background:#192b3d;padding:12px 18px;gap:8px;flex-wrap:wrap"><label>曲名 <input id="songTitle" placeholder="曲名" onchange="updateSongMeta()"></label><label>アーティスト <input id="songArtist" placeholder="アーティスト" onchange="updateSongMeta()"></label><label>種類 <select id="songType" onchange="updateSongMeta()"><option value="original">オリジナル</option><option value="cover">カバー</option></select></label><label>原曲キー <input id="songKey" placeholder="C" style="width:65px" onchange="updateSongMeta()"></label><label>カポ <input id="songCapo" type="number" min="0" max="12" style="width:65px" onchange="updateSongMeta()"></label></div><main id="songMain"><p class="notice">コードと歌詞を小節ごとに上下表示。▶再生でBPMに合わせてハイライトとスクロールが進みます。<b>音源再生はありません。</b> コードの拍・歌詞の小節割りは仮配置です。編集ONではコード名をタップしてコードを変更できます。運指図をタップすると運指の選択・自作・保存ができます。最下部の「＋ 最終小節の後に追加」から続きを書き足せます。編集ONでは各小節の歌詞欄に直接入力できます。コードは各拍のボックスをタップして設定します。編集ONのときはコードや歌詞をタップして変更できます。編集OFFではコードをタップするとその拍から再生位置を指定できます。</p><section class="copy-panel" style="margin:12px 0"><h3>🎼 基本拍子（Ver.70）</h3><div class="meter-tools"><label>拍子 <select id="baseMeter" onchange="setBaseMeter(this.value)"><option>4/4</option><option>3/4</option><option>2/4</option><option>6/8</option><option>5/4</option><option>7/8</option></select></label><span class="help">途中の変更は各小節の「拍子変更」で設定。変更した小節から次の変更まで有効です。</span></div></section><section class="copy-panel" id="sectionMarkerPanel"><h3>🎵 セクション区切り（Ver.113）</h3><p class="help">任意の小節からIntro・Verse・Chorusなどを設定すると、その小節から新しい行に表示します。コード・歌詞・拍位置は変更しません。設定しない場合は従来の区切りを表示します。</p><div class="fields" style="display:flex;flex-wrap:wrap;gap:8px;align-items:end"><label>開始小節 <input id="markerBar" type="number" min="1" value="1" style="width:85px"></label><label>セクション名 <input id="markerName" list="sectionNames" placeholder="Chorus" maxlength="60" style="width:170px"></label><datalist id="sectionNames"><option value="Intro"><option value="Verse 1"><option value="Verse 2"><option value="Pre-Chorus"><option value="Chorus"><option value="Bridge"><option value="Interlude"><option value="Outro"></datalist><button type="button" onclick="setSectionMarker()">この小節から区切る</button></div><div id="sectionMarkerList" class="help" style="margin-top:10px"></div></section><div class="lyrics-workspace"><div id="sheet"></div><aside class="lyrics-memo" id="lyricsMemoPanel" aria-label="歌詞メモ帳"><h3>📝 歌詞メモ帳（Ver.113）</h3><p class="help">歌詞をまとめて貼り付け、必要な部分を選択してコピーできます。小節の歌詞欄へ貼り付けてください。</p><textarea id="lyricsMemoText" spellcheck="false" placeholder="ここに歌詞全体を貼り付けます" oninput="updateLyricsMemo()"></textarea><div class="lyrics-memo-actions"><button type="button" onclick="copyLyricsMemoSelection()">選択部分をコピー</button><button type="button" onclick="copyLyricsMemoAll()">全文コピー</button><button type="button" class="memo-close" onclick="toggleLyricsMemo(false)">閉じる</button></div><p class="lyrics-memo-status" id="lyricsMemoStatus" role="status">楽曲ごとに自動保存します。</p></aside></div><button type="button" class="lyrics-memo-toggle" id="lyricsMemoToggle" onclick="toggleLyricsMemo(true)">📝 歌詞メモ帳</button><section class="copy-panel" id="pdfChordPanel"><h3>🎼 PDF譜面コード配置（Ver.113・仮配置対応）</h3><p class="help">「明日へと歩いてゆく」PDFのコードを、小節番号と拍番号でまとめて配置します。歌詞は変更しません。PDFの小節線から97小節分のコードを読み取りました。拍位置は推定のため、必ず配置内容を確認・修正してください。<b>必ずアレンジ版で操作してください。</b></p><p class="help">形式：小節番号 | 拍（1〜4） | コード。1行に1コード。例：2 | 1 | D</p><textarea id="pdfChordInput" rows="9" oninput="verifiedPdfChordText=null;document.getElementById('pdfEstimatedBeatsConfirmed').checked=false;document.getElementById('pdfProvisionalPlacement').checked=false" spellcheck="false" placeholder="2 | 1 | D&#10;2 | 3 | F#m&#10;3 | 1 | A" style="width:100%;font-size:15px;line-height:1.6;padding:12px;border-radius:8px;background:#fff;color:#142739"></textarea><div class="actions" style="align-items:center;flex-wrap:wrap"><label style="display:inline-flex;align-items:center;gap:8px">PDFファイルを選択 <input id="pdfChordFile" type="file" accept=".pdf,application/pdf" onchange="loadSupportedPdfChords(event)" style="max-width:260px"></label><button type="button" onclick="loadPdfChordProposal()">PDF全97小節の候補を読み込む</button></div><p id="pdfFileStatus" class="help" role="status">対応状況：今回の「明日へと歩いてゆく(2).pdf」は識別して候補を自動読込できます。その他のPDFの汎用解析は未実装です。拍位置は推定です。</p><div class="help" style="margin:8px 0"><label><input type="checkbox" id="pdfExtendBars"> 不足する小節を末尾に追加（既存の歌詞は保持）</label><br><label><input type="checkbox" id="pdfReplaceChords"> 既存のコードを譜面基準に置き換える（アレンジ版のみ。歌詞は保持）</label></div><p class="help" style="color:#ffd36b"><b>重要：</b>PDFのコード名・小節境界と、各コードの正確な拍位置は別の情報です。現行候補の拍位置（1拍目／3拍目）は推定値で、PDFから確定したものではありません。コード名が省略された小節は、直前のコードを1拍目に補完して毎小節表示します（N.C.は補完しません）。拍位置の推定は引き続き確認が必要です。</p><label style="display:block;margin:10px 0;color:#ffd36b"><input type="checkbox" id="pdfEstimatedBeatsConfirmed" onchange="verifiedPdfChordText=null"> PDFと照合し、推定拍位置を確認・修正しました（アレンジ版にのみ反映）</label><label style="display:block;margin:10px 0;color:#d6eaf8"><input type="checkbox" id="pdfProvisionalPlacement" onchange="if(this.checked)document.getElementById('pdfEstimatedBeatsConfirmed').checked=false"> 推定拍位置のまま仮配置する（PDF照合は未完了。配置後に手動修正します）</label><p class="help">「照合・修正済み」と「仮配置」のどちらか一方を選んでください。仮配置でもアレンジ版のみ変更し、原曲版と歌詞は保持します。</p><div class="actions"><button type="button" onclick="previewPdfChordInput()">配置内容を確認</button><button type="button" onclick="applyPdfChordInput()">確認したコードを配置</button></div><pre id="pdfChordPreview" style="white-space:pre-wrap;color:#d6eaf8;font-size:13px;max-height:250px;overflow:auto"></pre><details><summary>PDFに記載されたコードの参考一覧（譜面の段ごと）</summary><p class="help">これは各段の左から右へのコード順です。拍位置・小節境界を確定した一覧ではありません。</p><pre id="pdfChordRows" style="white-space:pre-wrap;font-size:12px;overflow:auto"></pre></details></section><section class="copy-panel" id="timedImportPanel"><h3>🎼 歌詞・コード一括取り込み（Ver.82）</h3><p class="help">1行に「小節番号 | 拍 | 歌詞 | コード」を入力。コードは省略できます。例：4 | 4 | 蝉の | A。複数の歌詞を同じ小節の異なる拍に配置できます。入力した拍位置は歌詞表示にも反映します。</p><div class="actions"><button onclick="fillSemiNoKoeTemplate()">「蝉の声」確認済み位置を読み込む</button></div><textarea id="timedImportText" rows="9" spellcheck="false" placeholder="4 | 4 | 蝉の | A&#10;5 | 1 | 声が | D&#10;6 | 1 | 遠く響く" style="width:100%;font-size:14px;line-height:1.7;padding:12px;border-radius:8px;background:#fff;color:#142739"></textarea><div class="fields" style="margin-top:10px"><label>作成する小節数 <input type="number" id="timedBarCount" min="1" max="300" value="90"></label><label>BPM <input type="number" id="timedBpm" min="30" max="240" value="71"></label><label>取り込み方法 <select id="timedImportMode"><option value="replace">現在の曲のコード譜を置き換える</option><option value="append">現在の曲の末尾に追加する</option></select></label></div><button onclick="importTimedSheet()">内容を確認して一括取り込み</button><p class="help">注意：置き換えでは現在開いている曲のコード譜を変更します。元データは残したい場合はマイ楽曲で「複製」または「全曲バックアップ」を先に行ってください。Chordify PDFを直接解析する機能ではありません。PDFのコードは右端の列に転記できます。歌詞とコードは取り込み後も編集できます。</p></section><section class="copy-panel" id="lyricsImportPanel"><h3>✍ 歌詞から小節を作成（Ver.70）</h3><p class="help">歌詞を貼り付けると改行ごとに仮の小節を作ります。既存のコード譜は上書きせず、末尾に追加します。空行は小節として扱いません。</p><textarea id="bulkLyrics" rows="5" placeholder="蝉の声が　遠く響く&#10;白い雲が　ゆっくり流れる" style="width:100%;font-size:16px;padding:12px;border-radius:8px;background:#fff;color:#142739"></textarea><div class="actions"><button onclick="importLyricBars()">歌詞を小節に追加</button></div><p class="help">分割：歌詞の文字をタップしてコード編集画面を開き、「この文字の前で小節分割」を選びます。結合：小節の「前の小節と結合」を押します。</p></section><section class="copy-panel"><h3>♻ 同じコード進行を繰り返す</h3><div class="fields"><label>コピー開始小節<select id="copyStart"></select></label><label>コピー終了小節<select id="copyEnd"></select></label><label>繰り返し回数<input id="copyCount" type="number" min="1" max="20" value="1"></label><label><span>歌詞もコピー</span><input id="copyLyrics" type="checkbox"></label></div><button onclick="repeatProgression()">選んだコード進行を最後に追加</button><div class="help">例：5〜8小節を選んで「1回」で4小節を追加します。通常はコードだけコピーし、歌詞は空欄にします。文字の上に配置したコードは「歌詞もコピー」を選んだ場合に限りコピーします。</div></section></main>
+<section id="libraryView" style="display:none;padding:18px;max-width:950px;margin:auto"><h2>♫ マイ楽曲</h2><p style="color:#bdd1e0">この端末に保存した曲を開けます。編集内容は自動保存されます。</p><button class="primary" onclick="createNewSong()">＋ 新しい曲を作成</button> <button onclick="toggleTrashView()" id="trashViewBtn">🗑 ゴミ箱</button> <button onclick="importLegacySong()">旧バージョンの曲を取り込む</button> <button onclick="exportSongLibrary()">⬇ 全曲バックアップ</button> <button onclick="document.getElementById('songRestoreFile').click()">⬆ バックアップから復元</button><input id="songRestoreFile" type="file" accept=".json,application/json" style="display:none" onchange="restoreSongLibrary(event)"><div style="margin:15px 0;display:flex;gap:8px;flex-wrap:wrap"><input id="librarySearch" placeholder="曲名・アーティスト名で検索" oninput="renderLibrary()" style="min-width:220px;padding:12px;flex:1"><select id="librarySort" onchange="renderLibrary()" style="padding:12px"><option value="updated">更新が新しい順</option><option value="title">曲名順</option></select></div><div id="librarySongs"></div><p id="libraryMessage" style="color:#ffd36b"></p></section><div id="songMeta" style="display:none;background:#192b3d;padding:12px 18px;gap:8px;flex-wrap:wrap"><label>曲名 <input id="songTitle" placeholder="曲名" onchange="updateSongMeta()"></label><label>アーティスト <input id="songArtist" placeholder="アーティスト" onchange="updateSongMeta()"></label><label>種類 <select id="songType" onchange="updateSongMeta()"><option value="original">オリジナル</option><option value="cover">カバー</option></select></label><label>原曲キー <input id="songKey" placeholder="C" style="width:65px" onchange="updateSongMeta()"></label><label>カポ <input id="songCapo" type="number" min="0" max="12" style="width:65px" onchange="updateSongMeta()"></label></div><div id="v100Hud" aria-live="off"><div><div id="v100Measure">第1小節</div><div id="v100BeatDots" aria-label="拍位置"></div><small id="v100State">タッチで一時停止</small></div><div id="v100Transport"><button type="button" id="v100Restart" onclick="event.stopPropagation();restartFromBeginning()">↩ 最初から再生</button><button type="button" id="v100Resume" onclick="event.stopPropagation();resumeFromHere()">▶ ここから再生</button></div><button id="v100Exit" type="button" onclick="event.stopPropagation();if(playing||countInActive)pausePlayback();toggleFocusPerformance()">✕ 終了</button></div><main id="songMain"><p class="notice">コードと歌詞を小節ごとに上下表示。▶再生でBPMに合わせてハイライトとスクロールが進みます。<b>音源再生はありません。</b> コードの拍・歌詞の小節割りは仮配置です。編集ONではコード名をタップしてコードを変更できます。運指図をタップすると運指の選択・自作・保存ができます。最下部の「＋ 最終小節の後に追加」から続きを書き足せます。編集ONでは各小節の歌詞欄に直接入力できます。コードは各拍のボックスをタップして設定します。編集ONのときはコードや歌詞をタップして変更できます。編集OFFではコードをタップするとその拍から再生位置を指定できます。</p><section class="copy-panel" style="margin:12px 0"><h3>🎼 基本拍子（Ver.70）</h3><div class="meter-tools"><label>拍子 <select id="baseMeter" onchange="setBaseMeter(this.value)"><option>4/4</option><option>3/4</option><option>2/4</option><option>6/8</option><option>5/4</option><option>7/8</option></select></label><span class="help">途中の変更は各小節の「拍子変更」で設定。変更した小節から次の変更まで有効です。</span></div></section><section class="copy-panel" id="sectionMarkerPanel"><h3>🎵 セクション区切り（Ver.113）</h3><p class="help">任意の小節からIntro・Verse・Chorusなどを設定すると、その小節から新しい行に表示します。コード・歌詞・拍位置は変更しません。設定しない場合は従来の区切りを表示します。</p><div class="fields" style="display:flex;flex-wrap:wrap;gap:8px;align-items:end"><label>開始小節 <input id="markerBar" type="number" min="1" value="1" style="width:85px"></label><label>セクション名 <input id="markerName" list="sectionNames" placeholder="Chorus" maxlength="60" style="width:170px"></label><datalist id="sectionNames"><option value="Intro"><option value="Verse 1"><option value="Verse 2"><option value="Pre-Chorus"><option value="Chorus"><option value="Bridge"><option value="Interlude"><option value="Outro"></datalist><button type="button" onclick="setSectionMarker()">この小節から区切る</button></div><div id="sectionMarkerList" class="help" style="margin-top:10px"></div></section><div class="lyrics-workspace"><div id="sheet"></div><aside class="lyrics-memo" id="lyricsMemoPanel" aria-label="歌詞メモ帳"><h3>📝 歌詞メモ帳（Ver.113）</h3><p class="help">歌詞をまとめて貼り付け、必要な部分を選択してコピーできます。小節の歌詞欄へ貼り付けてください。</p><textarea id="lyricsMemoText" spellcheck="false" placeholder="ここに歌詞全体を貼り付けます" oninput="updateLyricsMemo()"></textarea><div class="lyrics-memo-actions"><button type="button" onclick="copyLyricsMemoSelection()">選択部分をコピー</button><button type="button" onclick="copyLyricsMemoAll()">全文コピー</button><button type="button" class="memo-close" onclick="toggleLyricsMemo(false)">閉じる</button></div><p class="lyrics-memo-status" id="lyricsMemoStatus" role="status">楽曲ごとに自動保存します。</p></aside></div><button type="button" class="lyrics-memo-toggle" id="lyricsMemoToggle" onclick="toggleLyricsMemo(true)">📝 歌詞メモ帳</button><section class="copy-panel" id="pdfChordPanel"><h3>🎼 PDF譜面コード配置（Ver.113・仮配置対応）</h3><p class="help">「明日へと歩いてゆく」PDFのコードを、小節番号と拍番号でまとめて配置します。歌詞は変更しません。PDFの小節線から97小節分のコードを読み取りました。拍位置は推定のため、必ず配置内容を確認・修正してください。<b>必ずアレンジ版で操作してください。</b></p><p class="help">形式：小節番号 | 拍（1〜4） | コード。1行に1コード。例：2 | 1 | D</p><textarea id="pdfChordInput" rows="9" oninput="verifiedPdfChordText=null;document.getElementById('pdfEstimatedBeatsConfirmed').checked=false;document.getElementById('pdfProvisionalPlacement').checked=false" spellcheck="false" placeholder="2 | 1 | D&#10;2 | 3 | F#m&#10;3 | 1 | A" style="width:100%;font-size:15px;line-height:1.6;padding:12px;border-radius:8px;background:#fff;color:#142739"></textarea><div class="actions" style="align-items:center;flex-wrap:wrap"><label style="display:inline-flex;align-items:center;gap:8px">PDFファイルを選択 <input id="pdfChordFile" type="file" accept=".pdf,application/pdf" onchange="loadSupportedPdfChords(event)" style="max-width:260px"></label><button type="button" onclick="loadPdfChordProposal()">PDF全97小節の候補を読み込む</button></div><p id="pdfFileStatus" class="help" role="status">対応状況：今回の「明日へと歩いてゆく(2).pdf」は識別して候補を自動読込できます。その他のPDFの汎用解析は未実装です。拍位置は推定です。</p><div class="help" style="margin:8px 0"><label><input type="checkbox" id="pdfExtendBars"> 不足する小節を末尾に追加（既存の歌詞は保持）</label><br><label><input type="checkbox" id="pdfReplaceChords"> 既存のコードを譜面基準に置き換える（アレンジ版のみ。歌詞は保持）</label></div><p class="help" style="color:#ffd36b"><b>重要：</b>PDFのコード名・小節境界と、各コードの正確な拍位置は別の情報です。現行候補の拍位置（1拍目／3拍目）は推定値で、PDFから確定したものではありません。コード名が省略された小節は、直前のコードを1拍目に補完して毎小節表示します（N.C.は補完しません）。拍位置の推定は引き続き確認が必要です。</p><label style="display:block;margin:10px 0;color:#ffd36b"><input type="checkbox" id="pdfEstimatedBeatsConfirmed" onchange="verifiedPdfChordText=null"> PDFと照合し、推定拍位置を確認・修正しました（アレンジ版にのみ反映）</label><label style="display:block;margin:10px 0;color:#d6eaf8"><input type="checkbox" id="pdfProvisionalPlacement" onchange="if(this.checked)document.getElementById('pdfEstimatedBeatsConfirmed').checked=false"> 推定拍位置のまま仮配置する（PDF照合は未完了。配置後に手動修正します）</label><p class="help">「照合・修正済み」と「仮配置」のどちらか一方を選んでください。仮配置でもアレンジ版のみ変更し、原曲版と歌詞は保持します。</p><div class="actions"><button type="button" onclick="previewPdfChordInput()">配置内容を確認</button><button type="button" onclick="applyPdfChordInput()">確認したコードを配置</button></div><pre id="pdfChordPreview" style="white-space:pre-wrap;color:#d6eaf8;font-size:13px;max-height:250px;overflow:auto"></pre><details><summary>PDFに記載されたコードの参考一覧（譜面の段ごと）</summary><p class="help">これは各段の左から右へのコード順です。拍位置・小節境界を確定した一覧ではありません。</p><pre id="pdfChordRows" style="white-space:pre-wrap;font-size:12px;overflow:auto"></pre></details></section><section class="copy-panel" id="timedImportPanel"><h3>🎼 歌詞・コード一括取り込み（Ver.82）</h3><p class="help">1行に「小節番号 | 拍 | 歌詞 | コード」を入力。コードは省略できます。例：4 | 4 | 蝉の | A。複数の歌詞を同じ小節の異なる拍に配置できます。入力した拍位置は歌詞表示にも反映します。</p><div class="actions"><button onclick="fillSemiNoKoeTemplate()">「蝉の声」確認済み位置を読み込む</button></div><textarea id="timedImportText" rows="9" spellcheck="false" placeholder="4 | 4 | 蝉の | A&#10;5 | 1 | 声が | D&#10;6 | 1 | 遠く響く" style="width:100%;font-size:14px;line-height:1.7;padding:12px;border-radius:8px;background:#fff;color:#142739"></textarea><div class="fields" style="margin-top:10px"><label>作成する小節数 <input type="number" id="timedBarCount" min="1" max="300" value="90"></label><label>BPM <input type="number" id="timedBpm" min="30" max="240" value="71"></label><label>取り込み方法 <select id="timedImportMode"><option value="replace">現在の曲のコード譜を置き換える</option><option value="append">現在の曲の末尾に追加する</option></select></label></div><button onclick="importTimedSheet()">内容を確認して一括取り込み</button><p class="help">注意：置き換えでは現在開いている曲のコード譜を変更します。元データは残したい場合はマイ楽曲で「複製」または「全曲バックアップ」を先に行ってください。Chordify PDFを直接解析する機能ではありません。PDFのコードは右端の列に転記できます。歌詞とコードは取り込み後も編集できます。</p></section><section class="copy-panel" id="lyricsImportPanel"><h3>✍ 歌詞から小節を作成（Ver.70）</h3><p class="help">歌詞を貼り付けると改行ごとに仮の小節を作ります。既存のコード譜は上書きせず、末尾に追加します。空行は小節として扱いません。</p><textarea id="bulkLyrics" rows="5" placeholder="蝉の声が　遠く響く&#10;白い雲が　ゆっくり流れる" style="width:100%;font-size:16px;padding:12px;border-radius:8px;background:#fff;color:#142739"></textarea><div class="actions"><button onclick="importLyricBars()">歌詞を小節に追加</button></div><p class="help">分割：歌詞の文字をタップしてコード編集画面を開き、「この文字の前で小節分割」を選びます。結合：小節の「前の小節と結合」を押します。</p></section><section class="copy-panel"><h3>♻ 同じコード進行を繰り返す</h3><div class="fields"><label>コピー開始小節<select id="copyStart"></select></label><label>コピー終了小節<select id="copyEnd"></select></label><label>繰り返し回数<input id="copyCount" type="number" min="1" max="20" value="1"></label><label><span>歌詞もコピー</span><input id="copyLyrics" type="checkbox"></label></div><button onclick="repeatProgression()">選んだコード進行を最後に追加</button><div class="help">例：5〜8小節を選んで「1回」で4小節を追加します。通常はコードだけコピーし、歌詞は空欄にします。文字の上に配置したコードは「歌詞もコピー」を選んだ場合に限りコピーします。</div></section></main>
 <div class="editor hidden" id="editor"><strong id="editorTitle"></strong><div id="picker" class="hidden"></div><input id="editorValue"><div id="selectionPreview" class="selection-preview" style="display:none" aria-live="polite"></div><div id="beatSetting" class="beat-setting" style="display:none"><label>演奏タイミング（詳細設定・任意） <select id="anchorBeat"></select></label><div class="small">通常は「自動（仮）」のままでOK。歌詞上の表示位置とは別に保存します。現段階では再生速度への反映は未対応です。</div></div><div id="auditionControls" style="display:none;gap:8px;flex-wrap:wrap;align-items:center;margin:9px 0"><button type="button" onclick="previewCurrentChord()">▶ このコードを試聴</button><button type="button" onclick="previewCurrentBar()">♫ この小節を試聴</button><button type="button" onclick="stopChordPreview()">■ 試聴停止</button><span id="auditionStatus" class="small" aria-live="polite"></span></div><div id="splitActions" style="display:none;gap:6px;flex-wrap:wrap;margin-top:8px"><button onclick="splitAtSelectedChar()">✂ この文字の前で小節分割</button></div><div class="actions"><button onclick="applyEdit()">反映</button><button onclick="closeEdit()">閉じる</button></div></div>
-<div id="focusFingeringPopup" role="dialog" aria-modal="false" aria-label="コードの押さえ方" hidden><div class="focus-fingering-inner"><div class="focus-fingering-top"><strong id="focusFingeringName"></strong><span style="font-size:11px;color:#c6d8e4">⠿ 移動</span><button type="button" onclick="resetFocusFingeringPosition()" title="右上に戻す">↺ 位置</button><button type="button" onclick="closeFocusFingering()">✕ 閉じる</button></div><div id="focusFingeringDiagram"></div><p>運指候補です。押さえ方は演奏前に確認してください。</p></div></div><div id="fingeringPanel" role="dialog" aria-modal="true" aria-labelledby="fingeringTitle"><div class="inner"><h3 id="fingeringTitle">運指を編集</h3><p class="note">基本コードはロー・セーハ・ハイポジションから選べます。指板のマスをタップして自作運指を追加できます。「セーハ入力」では開始する弦とフレットをタップし、次に終了する弦をタップします（終了位置はどのマスでも構いません）。左の「×／○」をタップするとミュート・開放弦を切り替えます。6弦は一番下、1弦は一番上です。</p><div class="fingering-choices"><label for="fingeringChoice">押さえ方を選択</label><select id="fingeringChoice" onchange="selectFingeringChoice(this.value)"></select><button type="button" onclick="newFingeringChoice()">＋ 新しい運指を作成</button></div><div class="barre-tools"><button type="button" id="normalModeBtn" onclick="setFingeringMode('normal')">● 通常入力</button><button type="button" id="barreModeBtn" onclick="setFingeringMode('barre')">▬ セーハ入力</button><button type="button" onclick="clearFingeringBarre()">セーハ解除</button><button type="button" onclick="clearFingeringDraft()">↺ 入力を白紙にする</button></div><p id="barreHint" class="note" aria-live="polite"></p><div class="fret-nav"><button type="button" onclick="moveFingeringWindow(-1)">◀ 低いフレット</button><strong id="fingeringRange">1〜5フレット</strong><button type="button" onclick="moveFingeringWindow(1)">高いフレット ▶</button></div><div id="fingeringBoard" class="fingering-board"></div><p id="fingeringWarning" class="note" aria-live="polite"></p><div class="actions"><button onclick="saveCustomFingering()">この運指を保存</button><button onclick="resetCustomFingering()">この自作運指を削除</button><button onclick="closeFingering()">閉じる</button></div></div></div></div>
+<div id="focusFingeringPopup" role="dialog" aria-modal="false" aria-label="コードの押さえ方" hidden><div class="focus-fingering-inner"><div class="finger-mini-toolbar"><span class="finger-drag-grip" title="ここをドラッグして移動">⠿</span><button type="button" class="finger-mini-btn" onclick="toggleFingerMiniSettings(event)" title="運指図サイズ設定">⚙</button><button type="button" class="finger-mini-btn" onclick="closeFocusFingering()" title="閉じる">×</button></div><div class="focus-fingering-top"><strong id="focusFingeringName"></strong><span style="font-size:11px;color:#c6d8e4">⠿ 移動</span><button type="button" onclick="resetFocusFingeringPosition()" title="右上に戻す">↺ 位置</button><button type="button" onclick="closeFocusFingering()">✕ 閉じる</button></div><div class="finger-size-control" role="group" aria-label="運指図のサイズ"><span>サイズ</span><button type="button" data-finger-size="small" onclick="setV100FingerSize('small')">小</button><button type="button" data-finger-size="medium" onclick="setV100FingerSize('medium')">中</button><button type="button" data-finger-size="large" onclick="setV100FingerSize('large')">大</button></div><div id="focusFingeringDiagram"></div><p>運指候補です。押さえ方は演奏前に確認してください。</p></div></div><div id="fingeringPanel" role="dialog" aria-modal="true" aria-labelledby="fingeringTitle"><div class="inner"><h3 id="fingeringTitle">運指を編集</h3><p class="note">基本コードはロー・セーハ・ハイポジションから選べます。指板のマスをタップして自作運指を追加できます。「セーハ入力」では開始する弦とフレットをタップし、次に終了する弦をタップします（終了位置はどのマスでも構いません）。左の「×／○」をタップするとミュート・開放弦を切り替えます。6弦は一番下、1弦は一番上です。</p><div class="fingering-choices"><label for="fingeringChoice">押さえ方を選択</label><select id="fingeringChoice" onchange="selectFingeringChoice(this.value)"></select><button type="button" onclick="newFingeringChoice()">＋ 新しい運指を作成</button></div><div class="barre-tools"><button type="button" id="normalModeBtn" onclick="setFingeringMode('normal')">● 通常入力</button><button type="button" id="barreModeBtn" onclick="setFingeringMode('barre')">▬ セーハ入力</button><button type="button" onclick="clearFingeringBarre()">セーハ解除</button><button type="button" onclick="clearFingeringDraft()">↺ 入力を白紙にする</button></div><p id="barreHint" class="note" aria-live="polite"></p><div class="fret-nav"><button type="button" onclick="moveFingeringWindow(-1)">◀ 低いフレット</button><strong id="fingeringRange">1〜5フレット</strong><button type="button" onclick="moveFingeringWindow(1)">高いフレット ▶</button></div><div id="fingeringBoard" class="fingering-board"></div><p id="fingeringWarning" class="note" aria-live="polite"></p><div class="actions"><button onclick="saveCustomFingering()">この運指を保存</button><button onclick="resetCustomFingering()">この自作運指を削除</button><button onclick="closeFingering()">閉じる</button></div></div></div></div>
 <script>
 function setUiMode(mode){if(!['performance','edit','daw'].includes(mode))mode='performance';document.body.dataset.uiMode=mode;document.querySelectorAll('.mode-panel').forEach(p=>p.hidden=p.dataset.panel!==mode);document.querySelectorAll('.mode-tab').forEach(b=>{const on=b.dataset.mode===mode;b.classList.toggle('selected',on);b.setAttribute('aria-pressed',String(on))});try{localStorage.setItem('hiki_ui_mode_v78',mode)}catch(e){}}
 window.addEventListener('DOMContentLoaded',()=>{let m='performance';try{m=localStorage.getItem('hiki_ui_mode_v78')||m}catch(e){}setUiMode(m)});
@@ -577,7 +699,7 @@ function resetFocusFingeringPosition(){
  requestAnimationFrame(()=>{if(!p.hidden){const r=p.getBoundingClientRect();clampFocusFingeringPosition(r.left,r.top)}});
 }
 function initializeFocusFingeringDrag(){
- const p=document.getElementById('focusFingeringPopup'),handle=p?.querySelector('.focus-fingering-top');if(!handle)return;
+ const p=document.getElementById('focusFingeringPopup'),handle=p?.querySelector('.finger-drag-grip');if(!handle)return;
  let drag=null;
  handle.addEventListener('pointerdown',e=>{
   if(e.target.closest('button')||e.button!==0)return;
@@ -594,14 +716,31 @@ function initializeFocusFingeringDrag(){
 }
 document.addEventListener('DOMContentLoaded',initializeFocusFingeringDrag);
 let autoFingeringChord="";
-function closeFocusFingering(){autoFingeringChord="";const p=document.getElementById('focusFingeringPopup');if(p)p.hidden=true}
-function showFocusFingering(chord){if(!focusPerformanceActive||!focusFingeringEnabled)return false;const p=document.getElementById('focusFingeringPopup');if(!p)return false;document.getElementById('focusFingeringName').textContent=chord;const host=document.getElementById('focusFingeringDiagram');host.replaceChildren(makeDiagram(chord));p.hidden=false;restoreFocusFingeringPosition();return true}
+const v100FingerSizeKey='hiki_v100_finger_size';
+let v100FingerSize=(()=>{try{const v=localStorage.getItem(v100FingerSizeKey);return ['small','medium','large'].includes(v)?v:'medium'}catch{return 'medium'}})();
+function setV100FingerSize(size){
+ if(!['small','medium','large'].includes(size))return;
+ v100FingerSize=size;
+ const popup=document.getElementById('focusFingeringPopup');
+ if(popup){popup.style.setProperty('--finger-popup-width',({small:116,medium:155,large:200})[size]+'px');
+ popup.querySelectorAll('[data-finger-size]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.fingerSize===size)));}
+ try{localStorage.setItem(v100FingerSizeKey,size)}catch{}
+ if(popup&&!popup.hidden)restoreFocusFingeringPosition();
+}
+setV100FingerSize(v100FingerSize);
+let v100ResumeAfterDiagram=false;
+function toggleFingerMiniSettings(event){
+ event?.stopPropagation();
+ document.getElementById('focusFingeringPopup')?.classList.toggle('finger-settings-open');
+}
+function closeFocusFingering(){autoFingeringChord="";const p=document.getElementById('focusFingeringPopup');const wasOpen=!!p&&!p.hidden;if(p)p.hidden=true;if(wasOpen&&v100ResumeAfterDiagram&&focusPerformanceActive&&!playing){v100ResumeAfterDiagram=false;togglePlay()}else v100ResumeAfterDiagram=false}
+function showFocusFingering(chord,automatic=false){if(!focusPerformanceActive||!focusFingeringEnabled)return false;const p=document.getElementById('focusFingeringPopup');if(!p)return false;document.getElementById('focusFingeringName').textContent=chord;const host=document.getElementById('focusFingeringDiagram');host.replaceChildren(makeDiagram(chord));host.title='タップで運指図を閉じる';host.onclick=(event)=>{event.stopPropagation();closeFocusFingering()};v100ResumeAfterDiagram=!automatic&&playing;if(!automatic&&playing)pausePlayback();p.hidden=false;setV100FingerSize(v100FingerSize);restoreFocusFingeringPosition();return true}
 // Ver.75: show the upcoming fingering one beat before the chord change.
 function updateAutomaticFingering(chord){
  if(!focusPerformanceActive||!focusFingeringEnabled||!chord)return;
  const display=transposeChord(chord,Number(data.transpose)||0);
  if(display===autoFingeringChord)return;
- if(showFocusFingering(display))autoFingeringChord=display;
+ if(showFocusFingering(display,true))autoFingeringChord=display;
 }
 function standardFingeringAt(pos){
  const changes=[];
@@ -660,6 +799,19 @@ function togglePlay(){closeFocusFingering();stopWholeSongPreview();clickLastStan
  anchorPosition=position;anchorTime=performance.now();playing=true;tick()}
  updateControls()}
 
+// Ver.100 fix4: restart immediately without a count-in; preserve the established playback engine.
+function restartFromBeginning(){
+ cancelCountIn();if(playing){playing=false;cancelAnimationFrame(raf)}
+ hasStartedPlayback=true;position=0;anchorPosition=0;anchorTime=performance.now();
+ clickLastStandardBeat=-1;clearBeatGuide();lastBar=-1;lastBeat=-1;
+ updateHighlight(false);if(scrolling)scrollToPlayingBar(0);
+ playing=true;tick();updateControls();
+}
+function resumeFromHere(){
+ if(playing||countInActive)return;
+ // Explicit transport buttons start immediately; screen tap retains its original count-in behavior.
+ hasStartedPlayback=true;togglePlay();
+}
 function pausePlayback(){if(countInActive){cancelCountIn();updateControls()}else if(playing)togglePlay()}
 function stop(){cancelCountIn();hasStartedPlayback=false;closeFocusFingering();stopWholeSongPreview();clickLastStandardBeat=-1;playing=false;cancelAnimationFrame(raf);position=0;clearBeatGuide();updateHighlight(false);updateControls()}
 function tick(){if(!playing)return;position=nowPosition();if(loopRangeEnabled){const {start,end}=loopBounds();if(position>=(end+1)*4){position=start*4;anchorPosition=position;anchorTime=performance.now();clickLastStandardBeat=-1;clearBeatGuide()}}if(position>=totalBeats){stop();return}updateHighlight(true);clickForStandardPosition();standardFingeringAt(position);raf=requestAnimationFrame(tick)}
@@ -672,6 +824,7 @@ let focusSize=(()=>{try{const v=localStorage.getItem(focusSizeKey);return ['smal
 /* Ver.70: 演奏画面の歌詞を小節内の横幅に収め、コード位置も同時に縮尺変更 */
 function fitFocusLyrics(){
  if(!document.body.classList.contains('focus-performance'))return;
+ if(window.matchMedia('(max-width:700px)').matches){document.querySelectorAll('#songMain .lyric-text').forEach(el=>el.style.removeProperty('font-size'));return;}
  const desired=parseFloat(getComputedStyle(document.body).getPropertyValue('--focus-lyric'))||23;
  document.querySelectorAll('#songMain .word').forEach(word=>{
   const lyric=word.querySelector('.lyric-text');if(!lyric)return;
@@ -732,7 +885,7 @@ function toggleFocusPerformance(){closeFocusFingering();
  document.body.classList.toggle('performance-mode',!editing);
  const b=document.getElementById('editBtn');
  b.classList.toggle('active',editing);b.textContent=editing?'編集ON':'編集OFF';
- render();updateFocusControls();requestAnimationFrame(fitFocusLyrics);
+ render();updateFocusControls();updateV100Hud();requestAnimationFrame(()=>{fitFocusLyrics();if(focusPerformanceActive&&scrolling)scrollToPlayingBar(Math.floor(position/4))});
 }
 function toggleEdit(){editing=!editing;document.body.classList.toggle('performance-mode',!editing);document.getElementById('editBtn').classList.toggle('active',editing);document.getElementById('editBtn').textContent=editing?'編集ON':'編集OFF';closeEdit();render()}
 function toggleScroll(){scrolling=!scrolling;document.getElementById('scrollBtn').classList.toggle('active',scrolling);document.getElementById('scrollBtn').textContent=scrolling?'自動スクロールON':'自動スクロールOFF';updateFocusControls()}
@@ -1481,25 +1634,72 @@ function applySectionMarkerLayout(){
   grid.append(holder);count++;
  });
 }
-function render(){if(wholeSongRunning)stopWholeSongPreview();/* Ver.95: normalize legacy one-bar chorus rows without changing bar order, chords, or lyrics. */if(data.chorus.some((row,i)=>i<data.chorus.length-1&&row.length!==4)){compactChorusRows();rebuildBars()}let root=document.getElementById('sheet');root.innerHTML='';let globalIndex=0;for(const [section,title] of [['intro','Intro'],['verse','Verse 1 ＋ Pre-Chorus'],['chorus','Chorus']]){let sec=document.createElement('section');sec.className='section';let h=document.createElement('h2');h.textContent=title;sec.append(h);let lines=section==='intro'?[data.intro]:data[section];lines.forEach((bars,li)=>{let line=document.createElement('div');line.className='line';let top=document.createElement('div');top.className='bars';let bottom=document.createElement('div');bottom.className='words';bars.forEach((bar,bi)=>{const barIndex=globalIndex++;let holder=document.createElement('div');holder.className='bar-wrap';let number=document.createElement('span');number.className='bar-number';number.textContent=String(barIndex+1);number.title='ここをクリックして白玉再生の開始小節を選択';number.style.cursor='pointer';number.onclick=(ev)=>{ev.stopPropagation();selectWhiteSongBar(barIndex)};holder.append(number);if(barIndex===0||data.meterChanges[barIndex]){const marker=document.createElement('span');marker.className='meter-change';marker.textContent=meterAt(barIndex);holder.append(marker)}if(editing){const mb=document.createElement('button');mb.className='edit-lyric';mb.style.margin='3px 0';mb.textContent='拍子変更';mb.onclick=()=>changeMeter(barIndex);holder.append(mb)}let b=document.createElement('div');b.className='bar';b.id='bar-'+barIndex;bar.forEach((ch,beat)=>{let el=document.createElement('div');el.className='beat';el.id='beat-'+(barIndex*4+beat);const visibleChord=transposeChord(ch,data.transpose);const chordLabel=document.createElement('span');chordLabel.className='chord-name';chordLabel.textContent=visibleChord||String(beat+1);el.append(chordLabel);if(visibleChord){chordLabel.dataset.moveKey='b:'+barIndex+':'+beat;chordLabel.dataset.moveBar=String(barIndex);chordLabel.title='コードを変更する';chordLabel.onclick=(ev)=>{ev.stopPropagation();selectWhiteSongBar(barIndex);if(showFocusFingering(visibleChord))return;openEdit('chord',barIndex,beat)}};if(visibleChord){const diagram=makeDiagram(visibleChord);diagram.classList.add('fingering-entry');diagram.title='運指を選択・編集';diagram.addEventListener('click',ev=>{ev.stopPropagation();if(editing&&showDiagrams)openFingering(visibleChord);else openEdit('chord',barIndex,beat)});el.append(diagram)}el.onclick=(ev)=>{ev.stopPropagation();selectWhiteSongBar(barIndex);if(visibleChord&&showFocusFingering(visibleChord))return;openEdit('chord',barIndex,beat)};b.append(el)});b.onclick=()=>selectWhiteSongBar(barIndex);b.title='クリックしてこの小節を再生開始位置に選択';holder.append(b);holder.append(renderBeatGuide(barIndex));top.append(holder);let w=document.createElement('div');w.className='word';w.id='word-'+barIndex;const str=data.words[section][li][bi]||'';const lyric=document.createElement('div');lyric.className='lyric-text';lyric.textContent=str||'　';if(editing){const field=document.createElement('textarea');field.className='bar-lyric-input';field.value=str;field.placeholder='この小節の歌詞を入力・貼り付け';field.setAttribute('aria-label',(barIndex+1)+'小節目の歌詞');field.onchange=()=>{const current=data.words[section][li][bi]||'';if(current!==field.value){data.words[section][li][bi]=field.value;persist()} };field.onclick=ev=>ev.stopPropagation();w.append(field);lyric.style.display='none';}else{w.append(lyric);}const edit=document.createElement('button');edit.className='edit-lyric';edit.textContent='✎ 歌詞を編集';edit.onclick=()=>openEdit('lyric',barIndex);edit.style.display='none';w.append(edit);if(barIndex>0){const merge=document.createElement('button');merge.className='edit-lyric';merge.textContent='↩ 前の小節と結合';merge.onclick=(ev)=>{ev.stopPropagation();mergePreviousBar(barIndex)};w.append(merge)}w.onclick=()=>{selectWhiteSongBar(barIndex);if(!editing)setPosition(barIndex*4)};holder.append(w)});line.append(top);sec.append(line)});if(lines.some(row=>row.length))root.append(sec)}applySectionMarkerLayout();document.getElementById('baseMeter').value=['4/4','3/4','2/4','6/8','5/4','7/8'].includes(data.baseMeter)?data.baseMeter:'4/4';lastBar=-1;lastBeat=-1;updateHighlight(false);updateCopyOptions();if(whiteSongSelectedBar>=allBars.length)whiteSongSelectedBar=0;selectWhiteSongBar(whiteSongSelectedBar);updateLoopControls();requestAnimationFrame(fitFocusLyrics)}
+function render(){if(wholeSongRunning)stopWholeSongPreview();/* Ver.95: normalize legacy one-bar chorus rows without changing bar order, chords, or lyrics. */if(data.chorus.some((row,i)=>i<data.chorus.length-1&&row.length!==4)){compactChorusRows();rebuildBars()}let root=document.getElementById('sheet');root.innerHTML='';let globalIndex=0;for(const [section,title] of [['intro','Intro'],['verse','Verse 1 ＋ Pre-Chorus'],['chorus','Chorus']]){let sec=document.createElement('section');sec.className='section';let h=document.createElement('h2');h.textContent=title;sec.append(h);let lines=section==='intro'?[data.intro]:data[section];lines.forEach((bars,li)=>{let line=document.createElement('div');line.className='line';let top=document.createElement('div');top.className='bars';let bottom=document.createElement('div');bottom.className='words';bars.forEach((bar,bi)=>{const barIndex=globalIndex++;let holder=document.createElement('div');holder.className='bar-wrap';let number=document.createElement('span');number.className='bar-number';number.textContent=String(barIndex+1);number.title='ここをクリックして白玉再生の開始小節を選択';number.style.cursor='pointer';number.onclick=(ev)=>{ev.stopPropagation();selectWhiteSongBar(barIndex)};holder.append(number);if(barIndex===0||data.meterChanges[barIndex]){const marker=document.createElement('span');marker.className='meter-change';marker.textContent=meterAt(barIndex);holder.append(marker)}if(editing){const mb=document.createElement('button');mb.className='edit-lyric';mb.style.margin='3px 0';mb.textContent='拍子変更';mb.onclick=()=>changeMeter(barIndex);holder.append(mb)}let b=document.createElement('div');b.className='bar';b.id='bar-'+barIndex;bar.forEach((ch,beat)=>{let el=document.createElement('div');el.className='beat';el.id='beat-'+(barIndex*4+beat);const visibleChord=transposeChord(ch,data.transpose);const chordLabel=document.createElement('span');chordLabel.className='chord-name';chordLabel.textContent=visibleChord||String(beat+1);el.append(chordLabel);if(visibleChord){chordLabel.dataset.moveKey='b:'+barIndex+':'+beat;chordLabel.dataset.moveBar=String(barIndex);chordLabel.title='コードを変更する';chordLabel.onclick=(ev)=>{ev.stopPropagation();selectWhiteSongBar(barIndex);if(showFocusFingering(visibleChord))return;openEdit('chord',barIndex,beat)}};if(visibleChord){const diagram=makeDiagram(visibleChord);diagram.classList.add('fingering-entry');diagram.title='運指を選択・編集';diagram.addEventListener('click',ev=>{ev.stopPropagation();if(editing&&showDiagrams)openFingering(visibleChord);else openEdit('chord',barIndex,beat)});el.append(diagram)}el.onclick=(ev)=>{ev.stopPropagation();selectWhiteSongBar(barIndex);if(visibleChord&&showFocusFingering(visibleChord))return;openEdit('chord',barIndex,beat)};b.append(el)});b.onclick=()=>selectWhiteSongBar(barIndex);b.title='クリックしてこの小節を再生開始位置に選択';holder.append(b);
+const measureDots=document.createElement('div');
+measureDots.className='measure-beat-dots';
+measureDots.setAttribute('aria-label','拍インジケーター');
+const dotCount=Math.max(1,Math.min(12,Number(meterAt(barIndex).split('/')[0])||4));
+for(let di=0;di<dotCount;di++){
+ const dot=document.createElement('i');dot.className='measure-beat-dot';
+ dot.dataset.beat=String(di);measureDots.append(dot);
+}
+holder.append(measureDots);
+holder.append(renderBeatGuide(barIndex));top.append(holder);let w=document.createElement('div');w.className='word';w.id='word-'+barIndex;const str=data.words[section][li][bi]||'';const lyric=document.createElement('div');lyric.className='lyric-text';lyric.textContent=str||'　';if(editing){const field=document.createElement('textarea');field.className='bar-lyric-input';field.value=str;field.placeholder='この小節の歌詞を入力・貼り付け';field.setAttribute('aria-label',(barIndex+1)+'小節目の歌詞');field.onchange=()=>{const current=data.words[section][li][bi]||'';if(current!==field.value){data.words[section][li][bi]=field.value;persist()} };field.onclick=ev=>ev.stopPropagation();w.append(field);lyric.style.display='none';}else{w.append(lyric);}const edit=document.createElement('button');edit.className='edit-lyric';edit.textContent='✎ 歌詞を編集';edit.onclick=()=>openEdit('lyric',barIndex);edit.style.display='none';w.append(edit);if(barIndex>0){const merge=document.createElement('button');merge.className='edit-lyric';merge.textContent='↩ 前の小節と結合';merge.onclick=(ev)=>{ev.stopPropagation();mergePreviousBar(barIndex)};w.append(merge)}w.onclick=()=>{selectWhiteSongBar(barIndex);if(!editing)setPosition(barIndex*4)};holder.append(w)});line.append(top);sec.append(line)});if(lines.some(row=>row.length))root.append(sec)}applySectionMarkerLayout();document.getElementById('baseMeter').value=['4/4','3/4','2/4','6/8','5/4','7/8'].includes(data.baseMeter)?data.baseMeter:'4/4';lastBar=-1;lastBeat=-1;updateHighlight(false);updateCopyOptions();if(whiteSongSelectedBar>=allBars.length)whiteSongSelectedBar=0;selectWhiteSongBar(whiteSongSelectedBar);updateLoopControls();requestAnimationFrame(fitFocusLyrics)}
 let lastBar=-1,lastBeat=-1;
 // Ver.73: the legacy .bar is hidden; scroll the visible bar-wrap/lyrics instead.
 function scrollToPlayingBar(bar){
- const target=document.getElementById('word-'+bar)?.closest('.bar-wrap')||document.getElementById('word-'+bar)||document.getElementById('bar-'+bar)?.closest('.bar-wrap');
+ if(!scrolling)return;
+ const target=document.getElementById('word-'+bar)?.closest('.bar-wrap');
  if(!target)return;
- // Keep the sticky header from covering the currently playing measure.
- // Ver.101: keep the active measure slightly above the viewport center,
- // leaving more space below to read the upcoming chords and lyrics.
- const rect=target.getBoundingClientRect();
- const header=document.querySelector('header');
- const headerBottom=header?Math.max(0,header.getBoundingClientRect().bottom):0;
- const usableHeight=Math.max(1,window.innerHeight-headerBottom);
- const desiredTop=headerBottom+usableHeight*0.38;
- const delta=rect.top-desiredTop;
- window.scrollTo({top:Math.max(0,window.scrollY+delta),behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+ const hud=document.body.classList.contains('focus-performance')?document.getElementById('v100Hud'):null;
+ const hudBottom=hud?Math.max(0,hud.getBoundingClientRect().bottom):0;
+ const r=target.getBoundingClientRect();
+ const desiredTop=hudBottom+Math.max(70,(window.innerHeight-hudBottom)*.24);
+ const delta=r.top-desiredTop;
+ if(Math.abs(delta)<12)return;
+ let parent=target.parentElement;
+ while(parent&&parent!==document.body){
+  const style=getComputedStyle(parent);
+  if(/auto|scroll/.test(style.overflowY)&&parent.scrollHeight>parent.clientHeight+5)break;
+  parent=parent.parentElement;
+ }
+ const scrollNode=(parent&&parent!==document.body)?parent:(document.scrollingElement||document.documentElement);
+ const max=Math.max(0,scrollNode.scrollHeight-scrollNode.clientHeight);
+ const next=Math.max(0,Math.min(max,scrollNode.scrollTop+delta));
+ if(Math.abs(next-scrollNode.scrollTop)>2){
+  scrollNode.scrollTo({top:next,behavior:'smooth'});
+ }
 }
-function updateHighlight(auto){let beat=Math.floor(position),bar=Math.floor(beat/4);if(lastBeat!==beat){if(lastBeat>=0){document.getElementById('beat-'+lastBeat)?.classList.remove('playing');document.getElementById('guide-'+Math.floor(lastBeat/4)+'-'+(lastBeat%4))?.classList.remove('playback-beat-now')}document.getElementById('beat-'+beat)?.classList.add('playing');document.getElementById('guide-'+bar+'-'+(beat%4))?.classList.add('playback-beat-now');lastBeat=beat}if(lastBar!==bar){if(lastBar>=0){document.getElementById('bar-'+lastBar)?.classList.remove('playing');document.getElementById('word-'+lastBar)?.classList.remove('playing');document.getElementById('word-'+lastBar)?.closest('.bar-wrap')?.classList.remove('playback-current')}document.getElementById('bar-'+bar)?.classList.add('playing');document.getElementById('word-'+bar)?.classList.add('playing');document.getElementById('word-'+bar)?.closest('.bar-wrap')?.classList.add('playback-current');if(auto&&scrolling)scrollToPlayingBar(bar);lastBar=bar}document.getElementById('progress').style.width=(position/totalBeats*100)+'%';document.getElementById('status').textContent=(playing?'▶ 再生中':'■ 停止中')+'　|　第'+(bar+1)+' / '+allBars.length+'小節　|　'+(beat%4+1)+'拍目　|　移調 '+(data.transpose>=0?'+':'')+data.transpose}
-function updateControls(){syncClickMode();document.getElementById('play').textContent=(playing||countInActive)?'Ⅱ 一時停止':'▶ 再生';const quickPlay=document.getElementById('quickPlay');if(quickPlay){quickPlay.textContent=(playing||countInActive)?'Ⅱ 一時停止':'▶ 再生';quickPlay.setAttribute('aria-pressed',String(playing))}updateFocusControls()}
+// Ver.100: compact meter-aware indicator; does not change the legacy four-slot timing model.
+function updateV100Hud(){
+ const hud=document.getElementById('v100Hud');if(!hud)return;
+ const bar=Math.max(0,Math.floor(position/4));
+ const meter=meterAt(bar).split('/');const count=Math.max(1,Math.min(12,Number(meter[0])||4));
+ const numerator=Math.max(1,Number(meter[0])||4);
+ const current=Math.min(count-1,Math.floor((position%4)/4*count));
+ document.getElementById('v100Measure').textContent='第'+(bar+1)+'小節 ・ '+meterAt(bar);
+ const dots=document.getElementById('v100BeatDots');
+ if(dots.children.length!==count)dots.replaceChildren(...Array.from({length:count},()=>document.createElement('i')));
+ Array.from(dots.children).forEach((dot,i)=>dot.classList.toggle('active',i===current));
+ document.getElementById('v100State').textContent=countInActive?'カウント中・タッチで中止':playing?'画面タッチで一時停止':'画面タッチで再開';
+}
+// Capture only on the score, not on the dedicated exit button or settings.
+document.addEventListener('click',function(e){
+ if(!document.body.classList.contains('focus-performance')||!window.matchMedia('(max-width:700px)').matches)return;
+ if(!e.target.closest('#songMain #sheet'))return;
+ if(e.target.closest('.beat-code,.above-chord,.chord-name'))return;
+ e.preventDefault();e.stopImmediatePropagation();togglePlay();updateV100Hud();
+},true);
+function updateHighlight(auto){let beat=Math.floor(position),bar=Math.floor(beat/4);if(lastBeat!==beat){if(lastBeat>=0){document.getElementById('beat-'+lastBeat)?.classList.remove('playing');document.getElementById('guide-'+Math.floor(lastBeat/4)+'-'+(lastBeat%4))?.classList.remove('playback-beat-now')}document.getElementById('beat-'+beat)?.classList.add('playing');document.getElementById('guide-'+bar+'-'+(beat%4))?.classList.add('playback-beat-now');lastBeat=beat}if(lastBar!==bar){if(lastBar>=0){document.getElementById('bar-'+lastBar)?.classList.remove('playing');document.getElementById('word-'+lastBar)?.classList.remove('playing');document.getElementById('word-'+lastBar)?.closest('.bar-wrap')?.classList.remove('playback-current')}document.getElementById('bar-'+bar)?.classList.add('playing');document.getElementById('word-'+bar)?.classList.add('playing');document.getElementById('word-'+bar)?.closest('.bar-wrap')?.classList.add('playback-current');if(auto&&scrolling)scrollToPlayingBar(bar);lastBar=bar}document.querySelectorAll('#songMain .measure-beat-dot.is-current').forEach(d=>d.classList.remove('is-current'));
+const activeDots=document.querySelectorAll('#word-'+bar+' ~ .measure-beat-dots .measure-beat-dot');
+const measureHolder=document.getElementById('word-'+bar)?.closest('.bar-wrap');
+if(measureHolder){
+ const dots=measureHolder.querySelectorAll('.measure-beat-dot');
+ const currentDot=Math.min(dots.length-1,Math.floor((position%4)/4*dots.length));
+ if(dots[currentDot])dots[currentDot].classList.add('is-current');
+}
+document.getElementById('progress').style.width=(position/totalBeats*100)+'%';updateV100Hud();document.getElementById('status').textContent=(playing?'▶ 再生中':'■ 停止中')+'　|　第'+(bar+1)+' / '+allBars.length+'小節　|　'+(beat%4+1)+'拍目　|　移調 '+(data.transpose>=0?'+':'')+data.transpose}
+function updateControls(){syncClickMode();document.getElementById('play').textContent=(playing||countInActive)?'Ⅱ 一時停止':'▶ 再生';const quickPlay=document.getElementById('quickPlay');if(quickPlay){quickPlay.textContent=(playing||countInActive)?'Ⅱ 一時停止':'▶ 再生';quickPlay.setAttribute('aria-pressed',String(playing))}updateFocusControls();updateV100Hud()}
 // Ver.70: Standard MIDI File (format 0), chord events + tempo/meter meta events.
 function midiVarLen(value){let v=Math.max(0,Math.floor(value)),out=[v&127];while((v>>=7)>0)out.unshift((v&127)|128);return out}
 function midiTextBytes(s){return Array.from(new TextEncoder().encode(s))}
