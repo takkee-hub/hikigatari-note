@@ -3353,7 +3353,24 @@ function handleFocusSeek101(e){
  e.preventDefault();e.stopImmediatePropagation();togglePlay();updateV100Hud();
 }
 document.addEventListener('click',handleFocusSeek101,true);
-function updateHighlight(auto){let beat=Math.floor(position),bar=Math.floor(beat/4);if(lastBeat!==beat){if(lastBeat>=0){document.getElementById('beat-'+lastBeat)?.classList.remove('playing');document.getElementById('guide-'+Math.floor(lastBeat/4)+'-'+(lastBeat%4))?.classList.remove('playback-beat-now')}document.getElementById('beat-'+beat)?.classList.add('playing');document.getElementById('guide-'+bar+'-'+(beat%4))?.classList.add('playback-beat-now');lastBeat=beat}if(lastBar!==bar){if(lastBar>=0){document.getElementById('bar-'+lastBar)?.classList.remove('playing');document.getElementById('word-'+lastBar)?.classList.remove('playing');document.getElementById('word-'+lastBar)?.closest('.bar-wrap')?.classList.remove('playback-current')}document.getElementById('bar-'+bar)?.classList.add('playing');document.getElementById('word-'+bar)?.classList.add('playing');document.getElementById('word-'+bar)?.closest('.bar-wrap')?.classList.add('playback-current');if(auto&&scrolling)scrollToPlayingBar(bar);lastBar=bar}document.querySelectorAll('#songMain .measure-beat-dot.is-current').forEach(d=>d.classList.remove('is-current'));
+function updateHighlight(auto){let beat=Math.floor(position),bar=Math.floor(beat/4);
+// Ver.141: rendering/seek can replace DOM nodes without resetting lastBar/lastBeat.
+// Reconcile all playback markers with the actual transport position every update.
+// Only touch playback classes; do not change editing selections or stored song data.
+const activeBarNode=document.getElementById('bar-'+bar);
+const activeWordNode=document.getElementById('word-'+bar);
+const activeWrapNode=activeWordNode?.closest('.bar-wrap');
+document.querySelectorAll('#songMain .bar.playing').forEach(el=>{if(el!==activeBarNode)el.classList.remove('playing')});
+document.querySelectorAll('#songMain .word.playing').forEach(el=>{if(el!==activeWordNode)el.classList.remove('playing')});
+document.querySelectorAll('#songMain .bar-wrap.playback-current').forEach(el=>{if(el!==activeWrapNode)el.classList.remove('playback-current')});
+document.querySelectorAll('#songMain .beat.playing').forEach(el=>{if(el.id!=='beat-'+beat)el.classList.remove('playing')});
+document.querySelectorAll('#songMain .playback-beat-now').forEach(el=>{if(el.id!=='guide-'+bar+'-'+(beat%4))el.classList.remove('playback-beat-now')});
+if(activeBarNode&&!activeBarNode.classList.contains('playing'))activeBarNode.classList.add('playing');
+if(activeWordNode&&!activeWordNode.classList.contains('playing'))activeWordNode.classList.add('playing');
+if(activeWrapNode&&!activeWrapNode.classList.contains('playback-current'))activeWrapNode.classList.add('playback-current');
+if(lastBar===bar&&auto&&scrolling&&activeWrapNode&&activeWrapNode!==document.getElementById('word-'+lastBar)?.closest('.bar-wrap'))scrollToPlayingBar(bar);
+if(lastBeat!==beat){if(lastBeat>=0){document.getElementById('beat-'+lastBeat)?.classList.remove('playing');document.getElementById('guide-'+Math.floor(lastBeat/4)+'-'+(lastBeat%4))?.classList.remove('playback-beat-now')}document.getElementById('beat-'+beat)?.classList.add('playing');document.getElementById('guide-'+bar+'-'+(beat%4))?.classList.add('playback-beat-now');lastBeat=beat}if(lastBar!==bar){if(lastBar>=0){document.getElementById('bar-'+lastBar)?.classList.remove('playing');document.getElementById('word-'+lastBar)?.classList.remove('playing');document.getElementById('word-'+lastBar)?.closest('.bar-wrap')?.classList.remove('playback-current')}document.getElementById('bar-'+bar)?.classList.add('playing');document.getElementById('word-'+bar)?.classList.add('playing');document.getElementById('word-'+bar)?.closest('.bar-wrap')?.classList.add('playback-current');if(auto&&scrolling)scrollToPlayingBar(bar);lastBar=bar}document.getElementById('beat-'+beat)?.classList.add('playing');document.getElementById('guide-'+bar+'-'+(beat%4))?.classList.add('playback-beat-now');
+document.querySelectorAll('#songMain .measure-beat-dot.is-current').forEach(d=>d.classList.remove('is-current'));
 const activeDots=document.querySelectorAll('#word-'+bar+' ~ .measure-beat-dots .measure-beat-dot');
 const measureHolder=document.getElementById('word-'+bar)?.closest('.bar-wrap');
 if(measureHolder){
