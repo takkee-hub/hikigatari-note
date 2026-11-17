@@ -1342,6 +1342,65 @@ header>.mode-tabs #backToLibrary101{flex:0 0 auto!important}
 }
 @media(max-width:380px){body.focus-performance #v100Transport{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 </style>
+
+<style id="ver140-mobile-performance-compact">
+/* Ver.140: iPhone performance HUD only. No changes to playback or stored songs. */
+@media (max-width:700px){
+ body.focus-performance #v100Hud{
+  display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  grid-template-areas:"status status status status" "settings settings settings settings" "transport transport transport library"!important;
+  gap:7px!important;padding:8px 10px 9px!important;
+  align-items:stretch!important;box-sizing:border-box!important;
+ }
+ body.focus-performance #v100Hud>div:first-child{
+  grid-area:status!important;display:flex!important;gap:5px 10px!important;
+  flex-wrap:wrap!important;align-items:center!important;min-width:0!important;
+ }
+ body.focus-performance #v100Measure{font-size:14px!important;line-height:1.3!important;}
+ body.focus-performance #v100State{font-size:11px!important;}
+ body.focus-performance #mobileViewSettings{
+  grid-area:settings!important;display:grid!important;
+  grid-template-columns:1.15fr 1fr .75fr .75fr .8fr!important;
+  gap:5px!important;width:100%!important;min-width:0!important;
+  margin:0!important;padding:0!important;align-items:stretch!important;
+ }
+ body.focus-performance #mobileViewSettings>button,
+ body.focus-performance #mobileViewSettings>select,
+ body.focus-performance #mobileViewSettings>label{
+  min-width:0!important;width:100%!important;min-height:44px!important;
+  margin:0!important;padding:6px 4px!important;box-sizing:border-box!important;
+  font-size:clamp(11px,3vw,14px)!important;line-height:1.2!important;
+  border-radius:9px!important;white-space:nowrap!important;
+ }
+ body.focus-performance #mobileViewSettings>label{display:flex!important;align-items:center!important;justify-content:center!important;gap:3px!important;}
+ body.focus-performance #mobileViewSettings input{width:42px!important;min-width:0!important;max-width:100%!important;padding:4px 2px!important;font-size:14px!important;box-sizing:border-box!important;}
+ body.focus-performance #v100Transport{
+  grid-area:transport!important;display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:5px!important;min-width:0!important;margin:0!important;
+ }
+ body.focus-performance #v100Transport button,
+ body.focus-performance #v100Transport #v101MobileSeek{
+  grid-column:auto!important;min-width:0!important;width:100%!important;
+  min-height:46px!important;padding:7px 3px!important;
+  font-size:clamp(10px,2.8vw,13px)!important;line-height:1.25!important;
+  white-space:normal!important;overflow:visible!important;text-overflow:unset!important;
+  border-radius:9px!important;
+ }
+ body.focus-performance:not(.library-open) #v101Library{
+  grid-area:library!important;justify-self:stretch!important;
+  position:relative!important;top:auto!important;left:auto!important;
+  width:100%!important;min-width:0!important;min-height:46px!important;
+  padding:6px 2px!important;margin:0!important;
+  font-size:clamp(10px,2.8vw,13px)!important;line-height:1.25!important;
+  white-space:normal!important;border-radius:9px!important;
+ }
+}
+@media (max-width:380px){
+ body.focus-performance #mobileViewSettings{grid-template-columns:repeat(4,minmax(0,1fr))!important;}
+ body.focus-performance #mobileViewSettings>label{grid-column:1/-1!important;min-height:36px!important;}
+}
+</style>
 </head><body>
 <header><h1>🎸 <span id="currentSongTitle">弾き語りノート</span> <span class="small">Ver.101 fix71</span></h1>
 <nav class="mode-tabs" aria-label="操作モード"><button type="button" class="mode-tab selected" data-mode="performance" onclick="setUiMode('performance')">🎤 弾き語り</button><button type="button" class="mode-tab" data-mode="edit" onclick="setUiMode('edit')">✍ 歌詞・コード入力</button><button id="backToLibrary101" type="button" onclick="returnToLibrary101()">← マイ楽曲に戻る</button></nav>
